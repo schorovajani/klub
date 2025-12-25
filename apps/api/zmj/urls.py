@@ -1,11 +1,19 @@
 from django.urls import path
 
 from .views import (
+    CategoriesView,
     CompanyView,
     CompanyTypesView,
+    EventAgreementView,
+    EventChecklistItemView,
+    EventChecklistView,
     EventContentView,
+    EventInvoiceView,
     EventOrganizersView,
     EventDetailView,
+    EventProgramDetailView,
+    EventProgramsView,
+    EventPublicOnWebView,
     RegistrationStatusView,
     RegistrationView,
     UserEventsView,
@@ -22,12 +30,18 @@ urlpatterns = [
         name="registration_status",
     ),
     path("company-types/", CompanyTypesView.as_view(), name="company_types"),
+    path("categories/", CategoriesView.as_view(), name="categories"),
     path("events/", UserEventsView.as_view(), name="user_events"),
     path("events/<slug:event_slug>/", EventDetailView.as_view(), name="event_detail"),
     path(
         "events/<slug:event_slug>/content/",
         EventContentView.as_view(),
         name="event_content",
+    ),
+    path(
+        "events/<slug:event_slug>/public-on-web/",
+        EventPublicOnWebView.as_view(),
+        name="event_public_on_web",
     ),
     path(
         "events/<slug:event_slug>/company/",
@@ -38,5 +52,35 @@ urlpatterns = [
         "events/<slug:event_slug>/organizers/",
         EventOrganizersView.as_view(),
         name="event_organizers",
+    ),
+    path(
+        "events/<slug:event_slug>/program/",
+        EventProgramsView.as_view(),
+        name="event_programs",
+    ),
+    path(
+        "events/<slug:event_slug>/program/<int:program_id>/",
+        EventProgramDetailView.as_view(),
+        name="event_program_detail",
+    ),
+    path(
+        "events/<slug:event_slug>/agreement/",
+        EventAgreementView.as_view(),
+        name="event_agreement",
+    ),
+    path(
+        "events/<slug:event_slug>/invoice/",
+        EventInvoiceView.as_view(),
+        name="event_invoice",
+    ),
+    path(
+        "events/<slug:event_slug>/checklist/",
+        EventChecklistView.as_view(),
+        name="event_checklist",
+    ),
+    path(
+        "events/<slug:event_slug>/checklist/<int:item_id>/",
+        EventChecklistItemView.as_view(),
+        name="event_checklist_item",
     ),
 ]
